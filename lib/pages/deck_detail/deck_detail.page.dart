@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../data/models/deck.model.dart';
-// import '../card_add/card_add.page.dart'; // Usaremos em breve
+import '../card_add/card_add.page.dart';
 
 class DeckDetailPage extends StatelessWidget {
   final int deckIndex;
@@ -57,7 +57,13 @@ class DeckDetailPage extends StatelessWidget {
                   OutlinedButton(
                     key: const Key("addCard"),
                     onPressed: () {
-                      // TODO: Navegar para tela de Adicionar Cartão
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CardAddPage(deckIndex: deckIndex),
+                        ),
+                      );
                     },
                     style: OutlinedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 55),
