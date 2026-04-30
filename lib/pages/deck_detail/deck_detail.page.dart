@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../data/models/deck.model.dart';
 import '../card_add/card_add.page.dart';
+import '../quiz/quiz.page.dart';
 
 class DeckDetailPage extends StatelessWidget {
   final int deckIndex;
@@ -83,7 +84,23 @@ class DeckDetailPage extends StatelessWidget {
                   ElevatedButton(
                     key: const Key("startQuiz"),
                     onPressed: () {
-                      // TODO: Navegar para tela de Quiz
+                      if (deck.cards.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Adicione cartões para iniciar o quiz!',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QuizPage(deck: deck),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
