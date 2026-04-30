@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../data/models/deck.model.dart';
 import '../deck_add/deck_add.page.dart';
-// import '../deck_detail/deck_detail.page.dart'; // Descomentaremos no futuro
+import '../deck_detail/deck_detail.page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -73,7 +73,12 @@ class HomePage extends StatelessWidget {
               final deck = decks[index];
               return InkWell(
                 onTap: () {
-                  // TODO: Ir para a tela de detalhes do baralho
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeckDetailPage(deckIndex: index),
+                    ),
+                  );
                 },
                 // REQUISITO: Excluir baralho ao manter pressionado
                 onLongPress: () => box.deleteAt(index),
